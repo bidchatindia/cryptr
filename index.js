@@ -1,9 +1,9 @@
 const crypto = require('crypto');
 
 const algorithm = 'aes-256-gcm';
-const ivLength = 8;
-const saltLength = 32;
-const tagLength = 8;
+const ivLength = 16;
+const saltLength = 64;
+const tagLength = 16;
 const tagPosition = saltLength + ivLength;
 const encryptedPosition = tagPosition + tagLength;
 
@@ -13,7 +13,7 @@ function Cryptr(secret) {
     }
 
     function getKey(salt) {
-        return crypto.pbkdf2Sync(secret, salt, 500, 32, 'sha512');
+        return crypto.pbkdf2Sync(secret, salt, 100, 32, 'sha512');
     }
 
     this.encrypt = function encrypt(value) {
